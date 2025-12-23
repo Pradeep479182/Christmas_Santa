@@ -1,0 +1,76 @@
+.play-btn {
+  height: 64px;
+  width: 64px;              /* ⭕ circle */
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+
+  background: radial-gradient(circle at top, #ff4d4d, #7f1d1d);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    width 0.45s ease,
+    border-radius 0.45s ease,
+    box-shadow 0.45s ease,
+    transform 0.45s ease;
+}
+
+/* 🚀 SHAPE MORPH ON HOVER */
+.play-btn:hover {
+  width: 180px;             /* 💊 pill */
+  border-radius: 999px;
+  transform: scale(1.1);
+
+  box-shadow:
+    0 0 12px rgba(255,255,255,0.6),
+    0 0 30px rgba(255,80,80,0.9),
+    0 0 60px rgba(255,0,0,0.7);
+}
+
+/* ✨ Shine layer */
+.play-btn::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.9),
+    transparent 60%
+  );
+  opacity: 0;
+}
+
+/* Shine animation */
+.play-btn:hover::before {
+  opacity: 1;
+  animation: shine 1.2s linear infinite;
+}
+
+/* 🧊 Text fade-in smoothly */
+.play-btn span {
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show text only on hover */
+.play-btn:hover span {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@keyframes shine {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}

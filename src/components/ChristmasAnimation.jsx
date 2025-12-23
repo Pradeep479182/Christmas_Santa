@@ -1,58 +1,93 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import SnowSystem from "./SnowSystem";
-
-// Images
+import MusicPlayButton from "./MusicPlayButton";
 import Santa from "../assets/santa.png";
-import Tree from "../assets/tree.png";
 import Cloud from "../assets/cloud.png";
 
 export default function ChristmasAnimation() {
+  const [started, setStarted] = useState(false);
+
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-red-700 to-red-900">
-      <h1 className="absolute top-10 w-full text-center text-white text-4xl font-bold z-20">
-        Merry Christmas 🎅
-      </h1>
-
-      {/* Cloud */}
-      <motion.img
-        src={Cloud}
-        alt="cloud"
-        className="absolute top-32 w-48 opacity-70 z-30"
-        initial={{ x: "-30%" }}
-        animate={{ x: ["-30%", "120%"] }}
-        transition={{
-          duration: 80,
-          repeat: Infinity,
-          ease: "linear",
-          repeatType: "loop",
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "linear-gradient(to bottom, #7f1d1d, #450a0a)",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          width: "400px",
+          height: "600px",
+          background: "#991b1b",
+          borderRadius: "16px",
+          overflow: "hidden",
         }}
-        style={{ willChange: "transform" }}
-      />
+      >
+        {/* Snow AFTER play */}
+        {started && <SnowSystem />}
 
-      <motion.img
-        src={Santa}
-        alt="santa"
-        className="absolute top-56 w-40 z-40"
-        initial={{ x: "-30%" }}
-        animate={{ x: ["-30%", "120%"] }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-          repeatType: "loop",
-        }}
-        style={{ willChange: "transform" }}
-      />
+        {/* Cloud */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "320px",
+            height: "220px",
+            backgroundImage: `url(${Cloud})`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "contain",
+          }}
+        >
+          <motion.img
+            src={Santa}
+            style={{
+              position: "absolute",
+              bottom: "20px",
+              width: "80px",
+              left: "50%",
+              transform: "translateX(-50%)",
+            }}
+            initial={{ x: "-80%" }}
+            animate={started ? { x: ["-80%", "20%"] } : {}}
+            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+          />
+        </div>
 
-      {/* Tree */}
-      <div className="absolute bottom-32 left-1/2 -translate-x-1/2">
-        <div className="absolute inset-0 bg-yellow-300/40 blur-3xl animate-pulse" />
-        <img src={Tree} className="relative w-64 z-10" />
+        {/* Snow ground */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            width: "100%",
+            height: "80px",
+            background: "white",
+            borderTopLeftRadius: "100%",
+            borderTopRightRadius: "100%",
+          }}
+        />
+
+        {/* Play Button */}
+        {!started && (
+          <div
+            style={{
+              position: "absolute",
+              bottom: 20,
+              width: "100%",
+              textAlign: "center",
+            }}
+          >
+            <MusicPlayButton setStarted={setStarted} />
+          </div>
+        )}
       </div>
-
-      <SnowSystem />
-
-      <div className="absolute bottom-0 w-full h-32 bg-white rounded-t-[100%]" />
     </div>
   );
 }
