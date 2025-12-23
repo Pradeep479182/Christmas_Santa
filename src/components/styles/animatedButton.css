@@ -1,6 +1,6 @@
 .play-btn {
   height: 64px;
-  width: 64px;              /* ⭕ circle */
+  width: 64px;              
   font-size: 18px;
   font-weight: bold;
   color: white;
@@ -26,7 +26,7 @@
 
 /* 🚀 SHAPE MORPH ON HOVER */
 .play-btn:hover {
-  width: 180px;             /* 💊 pill */
+  width: 180px;             
   border-radius: 999px;
   transform: scale(1.1);
 
