@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import SnowSystem from "./SnowSystem";
 
-
-
 // Images
 import Santa from "../assets/santa.png";
 import Tree from "../assets/tree.png";
@@ -11,7 +9,6 @@ import Cloud from "../assets/cloud.png";
 export default function ChristmasAnimation() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-red-700 to-red-900">
-
       <h1 className="absolute top-10 w-full text-center text-white text-4xl font-bold z-20">
         Merry Christmas 🎅
       </h1>
@@ -19,17 +16,32 @@ export default function ChristmasAnimation() {
       {/* Cloud */}
       <motion.img
         src={Cloud}
-        className="absolute top-32 w-48 opacity-70"
+        alt="cloud"
+        className="absolute top-32 w-48 opacity-70 z-30"
+        initial={{ x: "-30%" }}
         animate={{ x: ["-30%", "120%"] }}
-        transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+        transition={{
+          duration: 80,
+          repeat: Infinity,
+          ease: "linear",
+          repeatType: "loop",
+        }}
+        style={{ willChange: "transform" }}
       />
 
-      {/* Santa */}
       <motion.img
         src={Santa}
-        className="absolute top-56 w-40"
+        alt="santa"
+        className="absolute top-56 w-40 z-40"
+        initial={{ x: "-30%" }}
         animate={{ x: ["-30%", "120%"] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear",
+          repeatType: "loop",
+        }}
+        style={{ willChange: "transform" }}
       />
 
       {/* Tree */}
@@ -43,7 +55,4 @@ export default function ChristmasAnimation() {
       <div className="absolute bottom-0 w-full h-32 bg-white rounded-t-[100%]" />
     </div>
   );
-
-  
 }
-

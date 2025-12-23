@@ -24,7 +24,7 @@ export default function SnowLayer({ count = 30, wind = 0, speed = 5 }) {
   return (
     <>
       {flakes.map((f) => (
-        <motion.div
+        <Motion.div
           key={f.id}
           className="absolute rounded-full bg-white pointer-events-none"
           style={{
