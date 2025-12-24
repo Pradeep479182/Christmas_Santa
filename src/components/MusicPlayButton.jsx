@@ -1,19 +1,26 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import Music from "../assets/bg-music.mp4";
+import Music from "../assets/bg-music.mp3";
 
 export default function MusicPlayButton({ setStarted }) {
   const audioRef = useRef(null);
   const [hover, setHover] = useState(false);
+  const [started, setStartedLocal] = useState(false);
 
   const handlePlay = () => {
-    audioRef.current.play();
-    setStarted(true);
+    if (started) return; // 🔒 prevent multiple clicks
+
+    audioRef.current.volume = 0.6;
+    audioRef.current.currentTime = 0;
+    audioRef.current.play(); // 🎵 START MUSIC
+
+    setStarted(true);        // ❄ START ANIMATION
+    setStartedLocal(true);  // 🔁 lock button
   };
 
   return (
     <>
-      <audio ref={audioRef} loop src={Music} />
+      <audio ref={audioRef} src={Music} loop preload="auto" />
 
       <motion.button
         onClick={handlePlay}
@@ -33,14 +40,13 @@ export default function MusicPlayButton({ setStarted }) {
             "radial-gradient(circle at top, #ff4d4d, #7f1d1d)",
           border: "none",
           color: "white",
-          fontSize: 20,
+          fontSize: 18,
           fontWeight: "bold",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           gap: 10,
-          overflow: "hidden",
         }}
       >
         ▶ {hover && "Play"}

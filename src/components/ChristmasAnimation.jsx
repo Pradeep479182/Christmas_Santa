@@ -4,9 +4,11 @@ import SnowSystem from "./SnowSystem";
 import MusicPlayButton from "./MusicPlayButton";
 import Santa from "../assets/santa.png";
 import Cloud from "../assets/cloud.png";
+import SantaAnimation from "../assets/SantaAnimation.gif";
 
 export default function ChristmasAnimation() {
   const [started, setStarted] = useState(false);
+  const [playGif,setPlayGif] = useState(false);
 
   return (
     <div
@@ -30,6 +32,7 @@ export default function ChristmasAnimation() {
       >
         {/* Snow AFTER play */}
         {started && <SnowSystem />}
+        
 
         {/* Cloud */}
         <div
